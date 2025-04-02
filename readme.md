@@ -5,3 +5,7 @@ Hello Again
 Goodbye Again  
 안녕하세요  
 광민님 파일 최평안 수정
+Goodbye Again  
+안녕하세요  
+충돌 테스트 
+1인 2역 글 추가 
