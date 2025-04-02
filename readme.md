@@ -9,3 +9,4 @@ Goodbye Again
 안녕하세요  
 충돌 테스트 
 1인 2역 글 추가 
+mine1 추가 
