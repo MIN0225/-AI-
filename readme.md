@@ -2,6 +2,6 @@
 Hello  
 Goodbye  
 Hello Again  
-Goodbye Again
-안녕하세요
+Goodbye Again  
+안녕하세요  
 광민님 파일 최평안 수정
