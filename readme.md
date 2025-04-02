@@ -10,3 +10,4 @@ Goodbye Again
 충돌 테스트 
 1인 2역 글 추가 
 mine1 추가 
+mine2 추가  
