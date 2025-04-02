@@ -12,3 +12,4 @@ Goodbye Again
 mine1 추가 
 mine2 추가  
 mine1 1인2역 추가
+mine2 1인 2역 추가  
