@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <h1>숫자 맞추기 게임</h1>
+  <h2>1~100까지의 숫자 맞추기...</h2>
+  <input type="number" id="guessNumber" placeholder="숫자를 입력하시오">
+  <button id="guessButton" onclick="guessNumber()">Guess</button>
+  <p id="result"></p>
+
+  <script>
+    // 미션1. 랜덤 숫자를 만들고 기억해둔다
+    // 미션2. 사용자가 입력한 값을 보고,
+    //       내가 생각한 숫자보다 작으면? "숫자가 너무 작아요"
+    //       더 크면 "숫자가 너무 커요"
+    //       같으면? "정답입니다. 축하합니다~~"
+    //       힌트1: if로 비교하는 게 다...
+    //       힌트2: getElementById로 result를 가져다가... 결과를 작성
+    // 미션3. 풀이를 하면서... 어떻게 숫자를 찍어야 가장 좋은 것인가?? 나는 몇 번 만에 맞출까
+    //       몇 번만에 맞추는 게 이론적으로 가장 좋은 건가? 가장 큰 숫자인가?
+    //       50 -> 25 -> 12 -> 6 -> 3 -> 1
+    //       1~100까지의 숫자 중 랜덤 숫 맞추기는 최소 6번 만에 맞출 수 있다.
+
+    const numberInput = document.getElementById("guessNumber");
+    let randomNumber = Math.floor(Math.random() * 100) + 1;
+    console.log("answer:", randomNumber);
+
+    function guessNumber() {
+      let userGuessNumber = Number(numberInput.value);
+      const resultText = document.getElementById("result");
+      console.log("userGuessNumber:", userGuessNumber);
+      if (userGuessNumber < randomNumber) {
+        console.log("숫자가 너무 작아요");
+        document.getElementById("result").innerText = "숫자가 너무 작아요.";
+      } else if (userGuessNumber > randomNumber) {
+        console.log("숫자가 너무 커요");
+        document.getElementById("result").innerText = "숫자가 너무 커요.";
+      } else {
+        console.log("정답입니다. 축하합니다~~");
+        document.getElementById("result").innerText = "정답입니다. 축하합니다~~";
+      }
+    }
+
+  </script>
+</body>
+</html>

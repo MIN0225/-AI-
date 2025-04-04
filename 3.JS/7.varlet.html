@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="hello()">버튼1 hello</button>
+  <button onclick="bye()">버튼2 bye</button>
+  <script>
+
+    function hello() {
+      var score = 80;
+      if(score > 50) {
+        // var result = 100; // 전역이라 가능
+        let result = 100; // 로컬이라 아래서 오류남
+        console.log(score);
+      }
+      console.log(result);
+    }
+
+    function bye() {
+      score = 11111111;
+      console.log(score);
+    }
+  </script>
+</body>
+</html>
