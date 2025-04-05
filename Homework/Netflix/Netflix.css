@@ -23,8 +23,9 @@ header select {
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: 1000px;
   position: relative;
+  display: grid;
+  max-width: 1000px;
   margin: auto;
 }
 
@@ -65,13 +66,16 @@ header select {
 
 .slideshow-container-action {
   position: absolute;
+  width: 70%;
+  display: flex;
   top: 70%;
   left: 10%;
 }
 
 #slideshow-input {
-  width: 220px;
+  max-width: 280px;
   height: 40px;
+  flex: 2;
   background-color:rgb(67, 66, 66);
   color:rgb(255, 255, 255);
   border: 1px solid rgb(221, 221, 221);
@@ -79,23 +83,17 @@ header select {
 }
 
 #slideshow-button {
-  width: 220px;
+  width: 120px;
   height: 40px;
-  text-align: start;
+  flex-grow: 0;
+  text-align: center;
   background-color: red;
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 25px;
   border: none;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
+  padding-right: 15px;
+  margin-left: 5px;
 }
 
 /* The dots/bullets/indicators */
