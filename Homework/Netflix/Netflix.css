@@ -85,6 +85,7 @@ header select {
 #slideshow-button {
   width: 120px;
   height: 40px;
+  min-width: 120px;
   flex-grow: 0;
   text-align: center;
   background-color: red;
