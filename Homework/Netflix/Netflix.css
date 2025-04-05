@@ -4,34 +4,65 @@ body {
 
 header button {
   position: absolute;
-  right: 1em;
-  top: 1em;
+  border-radius: 15px;
+  right: 20px;
+  top: 2%;
+  padding: 5px 10px;
 }
 
 header select {
   position: absolute;
-  right: 7em;
-  top: 1em;
+  right: 85px;
+  top: 2%;
+  color: white;
+  background-color: rgb(29, 29, 29);
+  border-radius: 15px;
+  padding: 5px 10px;
 }
 
 #Netflix_logo {
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 30px;
 }
 
-* {box-sizing:border-box}
-
-/* Slideshow container */
 .slideshow-container {
   position: relative;
   display: grid;
-  max-width: 1000px;
-  margin: auto;
+  top: 13px;
+  margin: 0 10px;
+  width: 100%;
+  height: 370px;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 /* Hide the images by default */
 .mySlides {
   display: none;
+}
+
+.slideshow-container span {
+  position: absolute;
+  top: 40%;
+  left: 3%;
+  color: white;
+  font-size: 25px;
+}
+
+.slideshow-container p {
+  position: absolute;
+  top: 45%;
+  left: 3%;
+  color: white;
+  font-size: 15px;
+}
+
+.slideshow-container h3 {
+  position: absolute;
+  top: 55%;
+  left: 3%;
+  color: white;
+  font-size: 15px;
 }
 
 /* Next & previous buttons */
@@ -126,21 +157,26 @@ header select {
 
 .ad {
   position: relative;
-  background-color: lightgray;
-  border: 1px solidrgb(226, 226, 226);
+  background-color: rgba(212, 212, 212, 0.3);
+  border: 1px solid rgb(226, 226, 226);
   border-radius: 15px;
+  padding: 10px 0px;
+  margin: 0 20px;
 }
 
 #ad-text1 {
   color: white;
   font-size: 15px;
   padding: 10px;
+  margin-left: 30px;
 }
 
 #ad-text2 {
   color:rgb(175, 175, 175);
   font-size: 12px;
   padding: 10px;
+  margin-left: 30px;
+
 }
 
 .ad button {
@@ -150,29 +186,47 @@ header select {
   border: 1px solid white;
   border-radius: 15px;
   right: 5%;
-  top: 10px;
+  top: 35%;
 }
 
 #now {
-  position: relative;
   color: white;
   font-size: 15px;
-  margin: 50px 0;
+  margin: 20px;
 }
 
 .now-hot {
   display: flex;
 }
 
-.now-hot img {
-  width: 104px;
-  height: 208px;
-}
-
 .slide-container {
   display: flex;
+  margin: 0 20px;
   gap: 10px;
 }
+
+.slide-box {
+  position: relative;
+}
+
+.slide-box img {
+  width: 104px;
+  height: 208px;
+  border-radius: 15px;
+}
+
+.slide-box div {
+  position: absolute;
+  top: -2%;
+  left: -20%;
+  color: black;
+  font-size: 45px;
+  font-weight: bold;
+  -webkit-text-stroke: 2px white;
+  padding: 10px;
+}
+
+
 
 .slide-box {
   border-radius: 15px;
@@ -180,6 +234,7 @@ header select {
 
 #why-join {
   color: white;
+  margin-left: 20px;
 }
 
 .join {
@@ -188,12 +243,14 @@ header select {
   justify-content: center;
   gap: 10px;
   top: 10px;
+  margin: 0 50px 20px 50px;
 }
 .join-box {
   position: relative;
   flex: 1;
-  max-width: 130px;
+  /* max-width: 130px; */
   min-width: 80px;
+  min-height: 160px;
   border-radius: 15px;
   background-color:rgb(84, 84, 84);
   border: 1px solid #bbb;
@@ -202,19 +259,24 @@ header select {
 .join-hook {
   position: absolute;
   top: 10px;
-  left: 10px;
+  left: 5%;
   color: #fff;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .join-describe {
-  margin-top: 20px;
+  position: absolute;
+  top: 30%;
+  left: 5%;
   color:rgb(148, 148, 148);
   font-size: 10px;
+  left: 5%;
+  right: 5%;
 }
 
 #faq {
   color: lightgray;
+  margin-left: 20px;
 }
 
 .faq {
@@ -222,36 +284,51 @@ header select {
   flex-direction: column;
   gap: 5px;
   padding: 15px 10px;
+  margin-left: 20px;
 }
 
 .faq button {
   background-color:rgb(70, 70, 70);
   color: white;
-  border: 1px solid rgb(70, 70, 70);
-  border-radius: 5px;
+  border: 1px solid rgb(163, 163, 163);
+  border-radius: 10px;
   text-align: start;
+  padding: 20px;
 }
 
 #ready {
-  display: flex;
-  flex-direction: column;
   text-align: center;
   color: white;
-  font-size: 10px;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+
+.ready {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0 50px 20px 50px;
 }
 
 #input-email {
-  position: relative;
-  background-color: lightgray;
-  border: 1px solidrgb(221, 221, 221);
-  border-radius: 10px;
+  flex: 2;
+  background-color: rgba(67, 66, 66, 0.8);
+  border: 0.5px solid rgb(221, 221, 221);
+  border-radius: 20px;
+  padding: 10px;
 }
 
 #ready-start {
+  fleck-grow: 0;
+  width: 120px;
   background-color: red;
   color: white;
-  border-radius: 10px;
+  font-size: 18px;
+  border-radius: 20px;
   border: none;
+  padding: 8px;
 }
 
 .ready {
@@ -259,16 +336,22 @@ header select {
   gap: 10px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 .footer-content div {
   color: gray;
 }
 
+#question {
+  margin: 20px 0 30px 18px;
+}
+
 .footer-content-items {
   display: grid;
   grid: '. . .';
-  text-align: center;
+  text-align: start;
+  margin-left: 18px;
   gap: 10px;
   color: gray;
   font-size: 10px;
@@ -281,4 +364,5 @@ header select {
   border-radius: 15px;
   color: white;
   padding: 5px 20px;
+  margin: 40px 0 20px 18px;
 }
