@@ -7,7 +7,11 @@
   </head>
   <body>
     <header>
-      <img src="./resource/Netflix_logo.png" id="Netflix_logo" alt="넷플릭스 로고" />
+      <img
+        src="./resource/Netflix_logo.png"
+        id="Netflix_logo"
+        alt="넷플릭스 로고"
+      />
       <select name="language" id="language-selector">
         <option value="한국어">한국어</option>
         <option value="English">English</option>
@@ -26,14 +30,17 @@
         <div class="mySlides fade">
           <img src="./resource/img2.jpg" style="width: 100%" />
         </div>
-        
+
         <div class="mySlides fade">
           <img src="./resource/img3.webp" style="width: 100%" />
         </div>
 
         <span>영화, 시리즈 등을 무제한으로</span>
         <p>5,500원으로 시작하세요. 멤버십은 언제든지 해지 가능합니다.</p>
-        <h3>시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면 이메일 주소를 입력하세요.</h3>
+        <h3>
+          시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면 이메일 주소를
+          입력하세요.
+        </h3>
 
         <div class="slideshow-container-action">
           <input type="text" id="slideshow-input" placeholder="이메일 주소" />
@@ -63,46 +70,50 @@
       <div id="now">지금 뜨는 콘텐츠</div>
       <div class="now-hot">
         <div class="slide-container">
-          <div class="slide-box">
-            <div id="slide-box1">1</div>
-            <img src="./resource/rank1.webp" alt="지금 뜨는 콘텐츠 1위" />
+          <div class="slide-container-wrapper">
+            <div class="slide-box">
+              <div id="slide-box1">1</div>
+              <img src="./resource/rank1.webp" alt="지금 뜨는 콘텐츠 1위" />
+            </div>
+            <div class="slide-box">
+              <div id="slide-box2">2</div>
+              <img src="./resource/rank2.webp" alt="지금 뜨는 콘텐츠 2위" />
+            </div>
+            <div class="slide-box">
+              <div id="slide-box3">3</div>
+              <img src="./resource/rank3.webp" alt="지금 뜨는 콘텐츠 3위" />
+            </div>
+            <div class="slide-box">
+              <div id="slide-box4">4</div>
+              <img src="./resource/rank4.webp" alt="지금 뜨는 콘텐츠 4위" />
+            </div>
+            <div class="slide-box">
+              <div id="slide-box5">5</div>
+              <img src="./resource/rank5.webp" alt="지금 뜨는 콘텐츠 5위" />
+            </div>
+            <div class="slide-box">
+              <div id="slide-box6">6</div>
+              <img src="./resource/rank6.webp" alt="지금 뜨는 콘텐츠 6위" />
+            </div>
+            <div class="slide-box">
+              <div id="slide-box7">7</div>
+              <img src="./resource/rank7.webp" alt="지금 뜨는 콘텐츠 7위" />
+            </div>
+            <div class="slide-box">
+              <div id="slide-box8">8</div>
+              <img src="./resource/rank8.webp" alt="지금 뜨는 콘텐츠 8위" />
+            </div>
+            <div class="slide-box">
+              <div id="slide-box9">9</div>
+              <img src="./resource/rank9.webp" alt="지금 뜨는 콘텐츠 9위" />
+            </div>
+            <div class="slide-box">
+              <div id="slide-box10">10</div>
+              <img src="./resource/rank10.webp" alt="지금 뜨는 콘텐츠 10위" />
+            </div>
           </div>
-          <div class="slide-box">
-            <div id="slide-box2">2</div>
-            <img src="./resource/rank2.webp" alt="지금 뜨는 콘텐츠 2위" />
-          </div>
-          <div class="slide-box">
-            <div id="slide-box3">3</div>
-            <img src="./resource/rank3.webp" alt="지금 뜨는 콘텐츠 3위" />
-          </div>
-          <div class="slide-box">
-            <div id="slide-box4">4</div>
-            <img src="./resource/rank4.webp" alt="지금 뜨는 콘텐츠 4위" />
-          </div>
-          <div class="slide-box">
-            <div id="slide-box5">5</div>
-            <img src="./resource/rank5.webp" alt="지금 뜨는 콘텐츠 5위" />
-          </div>
-          <div class="slide-box">
-            <div id="slide-box6">6</div>
-            <img src="./resource/rank6.webp" alt="지금 뜨는 콘텐츠 6위" />
-          </div>
-          <div class="slide-box">
-            <div id="slide-box7">7</div>
-            <img src="./resource/rank7.webp" alt="지금 뜨는 콘텐츠 7위" />
-          </div>
-          <div class="slide-box">
-            <div id="slide-box8">8</div>
-            <img src="./resource/rank8.webp" alt="지금 뜨는 콘텐츠 8위" />
-          </div>
-          <div class="slide-box">
-            <div id="slide-box9">9</div>
-            <img src="./resource/rank9.webp" alt="지금 뜨는 콘텐츠 9위" />
-          </div>
-          <div class="slide-box">
-            <div id="slide-box10">10</div>
-            <img src="./resource/rank10.webp" alt="지금 뜨는 콘텐츠 10위" />
-          </div>
+          <a id="now-hot-prev" onclick="moveNowHotSlide('prev')">&#10094;</a>
+          <a id="now-hot-next" onclick="moveNowHotSlide('next')">&#10095;</a>
         </div>
       </div>
       <span id="why-join">가입해야 하는 또 다른 이유</span>
@@ -114,7 +125,7 @@
             스마트 TV, PlayStation, Xbox, Chromecast, Apple TV, 블루레이
             플레이어 등 다양한 디바이스에서 시청하세요.
           </div>
-          <img src="join-icon1" alt="" />
+          <!-- <img src="join-icon1" alt="" /> -->
         </div>
         <div class="join-box">
           <span class="join-hook"
@@ -122,32 +133,32 @@
           >
           <br />
 
-          <div class="join-describe"
-            >간편하게 저장하고 빈틈없이 즐겨보세요.</div
-          >
-          <img src="join-icon2" alt="" />
+          <div class="join-describe">
+            간편하게 저장하고 빈틈없이 즐겨보세요.
+          </div>
+          <!-- <img src="join-icon2" alt="" /> -->
         </div>
         <div class="join-box">
           <span class="join-hook">다양한 디바이스로 시청하세요</span>
           <br />
-          <div class="join-describe"
-            >각종 영화와 시리즈를 스마트폰, 태블릿, 노트북, TV에서 무제한으로
-            스트리밍하세요.</div
-          >
-          <img src="join-icon3" alt="" />
+          <div class="join-describe">
+            각종 영화와 시리즈를 스마트폰, 태블릿, 노트북, TV에서 무제한으로
+            스트리밍하세요.
+          </div>
+          <!-- <img src="join-icon3" alt="" /> -->
         </div>
         <div class="join-box">
           <div class="join-hook">어린이 전용 프로필을 만들어 보세요</div>
           <br />
-          <div class="join-describe"
-            >자기만의 공간에서 좋아하는 캐릭터와 즐기는 신나는 모험. 자녀에게 이
-            특별한 경험을 선물하세요. 넷플릭스 회원이라면 무료입니다.</div
-          >
-          <img src="join-icon4" alt="" />
+          <div class="join-describe">
+            자기만의 공간에서 좋아하는 캐릭터와 즐기는 신나는 모험. 자녀에게 이
+            특별한 경험을 선물하세요. 넷플릭스 회원이라면 무료입니다.
+          </div>
+          <!-- <img src="join-icon4" alt="" /> -->
         </div>
       </div>
 
-      <br>
+      <br />
       <span id="faq">자주 묻는 질문</span>
       <div class="faq">
         <button>넷플릭스에서 어떤 콘텐츠를 시청할 수 있나요?</button>
@@ -167,12 +178,13 @@
         <input type="text" id="input-email" placeholder="이메일 주소" />
         <button id="ready-start">시작하기 ></button>
       </div>
-      
     </main>
 
     <footer>
       <div class="footer-content">
-        <div id="question">질문이 있으신가요? 문의 전화: 00-308-321-0161 (수신자 부담)</div>
+        <div id="question">
+          질문이 있으신가요? 문의 전화: 00-308-321-0161 (수신자 부담)
+        </div>
         <div class="footer-content-items">
           <div>자주 묻는 질문</div>
           <div>고객 센터</div>
