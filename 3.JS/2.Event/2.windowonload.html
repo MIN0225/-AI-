@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // HTML, CSS, JS, 이미지 등 모두 완전히 로딩이 끝났음.
+    // 이거만, 다른 이벤트 대비해서 문법이 다름...
+    window.onload = function() {
+      console.log("모든 로딩이 끝남.");
+    }
+
+    window.onload = () => console.log("모든 로딩이 끝남2.");
+
+    document.addEventListener('DOMContentLoaded', () => console.log("DOM 로딩 완료")); //화살표 함수 표현법
+
+  </script>
+
+</body>
+</html>

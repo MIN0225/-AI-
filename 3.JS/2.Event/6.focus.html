@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="myInput">
+  <script>
+    document.getElementById("myInput").addEventListener('focus', function() {
+      console.log("입력창 포커스 됨");
+    });
+
+    document.getElementById("myInput").addEventListener('blur', function() {
+      console.log("입력창 un포커스 됨");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    #dragItem1 {
+      width: 100px;
+      height: 100px;
+      background-color: rgb(243, 243, 86);
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    #dragItem2 {
+      width: 100px;
+      height: 100px;
+      background-color: rgb(86, 243, 86);
+      margin-bottom: 20px;
+    }
+
+    #dragItem3 {
+      width: 100px;
+      height: 100px;
+      background-color: rgb(86, 86, 243);
+      margin-bottom: 20px;
+    }
+
+    #dropZone {
+      display: flex;
+      width: 200px;
+      height: 200px;
+      background-color: blue;
+      border: 2px dashed red;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="dragItems">
+    <div id="dragItem1" draggable="true">Drag Me</div>
+    <div id="dragItem2" draggable="true">Drag Me</div>
+    <div id="dragItem3" draggable="true">Drag Me</div>
+    <div id="dropZone">Drop here</div>
+  </div>
+  <script>
+    const dragItem1 = document.getElementById('dragItem1');
+    const dragItem2 = document.getElementById('dragItem2');
+    const dragItem3 = document.getElementById('dragItem3');
+    const dragItems = document.querySelectorAll('[draggable=true]');
+    const dropZone = document.getElementById('dropZone');
+
+    // 드래그 시작 시 어떤 요소인지 저장
+    dragItems.forEach(item => {
+      item.addEventListener('dragstart', function(e) {
+        e.dataTransfer.setData('text/plain', this.id);
+      });
+    });
+
+    dropZone.addEventListener('dragover', function(e){
+      console.log("드래그 오버");
+      e.preventDefault(); // 기본 동작 방지
+    })
+
+    dropZone.addEventListener('drop', function(e) {
+      e.preventDefault(); // 기본 동작 방지
+      const draggedId = e.dataTransfer.getData('text/plain');
+      console.log('draggedId: ', draggedId);
+      const draggedElement = document.getElementById(draggedId);
+      dropZone.appendChild(draggedElement);
+      console.log("drop 발생");
+      console.log("e: ", e);
+
+    })
+  </script>
+</body>
+</html>

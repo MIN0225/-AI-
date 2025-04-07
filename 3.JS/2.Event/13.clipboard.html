@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" value="이 내용을 복사하세요">
+  <button id="copyButton">복사하기</button>
+  <script>
+    document.getElementById('copyButton').addEventListener('click', function() {
+      const copyText = document.getElementById('copyButton');
+
+      copyText.select();
+      document.execCommand('copy');
+
+      alert('복사 완료: ' + copyText.value);
+    })
+  </script>
+</body>
+</html>

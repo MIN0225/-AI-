@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+    console.log("Hello, head");
+  </script>
+</head>
+<body>
+  <script>
+    function myHandler() { // 1. Old 스타일
+      console.log("DOM로딩 완료");
+    }
+
+    document.addEventListener('DOMContentLoaded', myHandler);
+    console.log("Hello, body");
+
+    document.addEventListener('DOMContentLoaded', function() { // 익명함수 스타일
+      console.log("DOM 로딩 완료2");
+    })
+
+    document.addEventListener('DOMContentLoaded', () => console.log("DOM 로딩 완료3")); //화살표 함수 표현법
+    
+  </script>
+</body>
+</html>

@@ -10,6 +10,7 @@
   <input type="number" id="guessNumber" placeholder="숫자를 입력하시오">
   <button id="guessButton" onclick="guessNumber()">Guess</button>
   <p id="result"></p>
+  <ol id="history"></ol>
 
   <script>
     // 미션1. 랜덤 숫자를 만들고 기억해둔다
@@ -21,27 +22,40 @@
     //       힌트2: getElementById로 result를 가져다가... 결과를 작성
     // 미션3. 풀이를 하면서... 어떻게 숫자를 찍어야 가장 좋은 것인가?? 나는 몇 번 만에 맞출까
     //       몇 번만에 맞추는 게 이론적으로 가장 좋은 건가? 가장 큰 숫자인가?
-    //       50 -> 25 -> 12 -> 6 -> 3 -> 1
-    //       1~100까지의 숫자 중 랜덤 숫 맞추기는 최소 6번 만에 맞출 수 있다.
+    //       50 -> 25 -> 12 -> 6 -> 3 -> 2 또는 1
+    //       1~100까지의 숫자 중 랜덤 숫 맞추기는 최소 7번 만에 맞출 수 있다.
+    // 미션4. 나의 찍기 기록을 계속 화면에 두고 싶다.
+    // 미션5. 각각의 입력값 뒤에 그 결과도 함께 적기
 
     const numberInput = document.getElementById("guessNumber");
+    const resultText = document.getElementById("result");
     let randomNumber = Math.floor(Math.random() * 100) + 1;
     console.log("answer:", randomNumber);
 
     function guessNumber() {
       let userGuessNumber = Number(numberInput.value);
-      const resultText = document.getElementById("result");
       console.log("userGuessNumber:", userGuessNumber);
+      // const text = document.createElement("p");
+      const history = document.getElementById("history");
+      // document.body.appendChild(text);
+      const newResult = document.createElement("li");
       if (userGuessNumber < randomNumber) {
         console.log("숫자가 너무 작아요");
-        document.getElementById("result").innerText = "숫자가 너무 작아요.";
+        // resultText.innerHTML = "<B>숫자가 너무 작아요.</B>";
+        // text.innerText = userGuessNumber + ": 숫자가 너무 작아요.";
+        newResult.innerText = "사용자 입력: " + userGuessNumber + " 숫자가 너무 작아요.";
       } else if (userGuessNumber > randomNumber) {
         console.log("숫자가 너무 커요");
-        document.getElementById("result").innerText = "숫자가 너무 커요.";
+        // resultText.innerHTML = '<B style=\"color:red\">숫자가 너무 커요.</B>';
+        // text.innerText = userGuessNumber + ": 숫자가 너무 커요.";
+        newResult.innerText = `사용자 입력:  ${userGuessNumber} 숫자가 너무 커요.`;
       } else {
         console.log("정답입니다. 축하합니다~~");
-        document.getElementById("result").innerText = "정답입니다. 축하합니다~~";
+        resultText.innerText = "정답입니다. 축하합니다~~";
+        return;
       }
+      // newResult.innerText = "사용자 입력: " + userGuessNumber;
+      history.appendChild(newResult);
     }
 
   </script>

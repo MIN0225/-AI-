@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    #myButton {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <button id="myButton">클릭하시오</button>
+  <!-- <script>
+    function myClick() {
+      console.log("버튼 클릭됨");
+    }
+  </script> -->
+
+  <script>
+    // document.getElementById("myButton").addEventListener('click', () => console.log("버튼클릭됨"));
+    document.getElementById("myButton").addEventListener('mousedown', function(e){
+      // console.log("마우스 눌림, 이벤트: ", event);
+      // if(e.button === 0) {
+      //   console.log("왼쪽 클릭");
+      // } else if(e.button === 1){
+      //   console.log("가운데/휠 클릭");
+      // } else if (e.button === 2) {
+      //   console.log("오른쪽 클릭");
+      // }
+
+      switch(e.button) {
+        case 0:
+          console.log("왼쪽 버튼 클릭");
+          break;
+        case 1:
+          console.log("가운데 버튼 클릭");
+          break;
+        case 2:
+          console.log("오른쪽 버튼 클릭");
+          break;
+        default: // 여기는 그 외 나머지 버튼 클릭
+          console.log("알 수 없는 버튼 클릭");
+      }
+
+    });
+    // document.getElementById("myButton").addEventListener('mouseup', () => console.log("마우스 뗌"));
+    
+  </script>
+</body>
+</html>

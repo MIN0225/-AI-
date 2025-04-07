@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    #myElement {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="myElement"></div>
+  <script>
+    const myElement = document.getElementById('myElement');
+
+    myElement.addEventListener('mouseover', () => {
+      console.log("마우스 올라감");
+      myElement.style.backgroundColor = 'cyan';
+    })
+
+    myElement.addEventListener('mouseout', function() {
+      console.log("마우스 나감");
+      this.style.backgroundColor = 'green';
+    })
+  </script>
+</body>
+</html>

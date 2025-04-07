@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>계산기</title>
+    <style>
+      .calculator {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      .calculator input {
+        grid-column: span 4;
+        padding: 10px;
+        font-size: 18px;
+      }
+
+      .calculator button {
+        padding: 10px;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <input type="text" id="result" readonly/>
+
+      <button onclick="clickSymbol(this)">+</button>
+      <button onclick="clickSymbol(this)">-</button>
+      <button onclick="clickSymbol(this)">*</button>
+      <button onclick="clickSymbol(this)">/</button>
+
+      <button onclick="clickNumber(this)">7</button>
+      <button onclick="clickNumber(this)">8</button>
+      <button onclick="clickNumber(this)">9</button>
+      <button onclick="clickCalculate()">=</button>
+
+      <button onclick="clickNumber(this)">4</button>
+      <button onclick="clickNumber(this)">5</button>
+      <button onclick="clickNumber(this)">6</button>
+      <button onclick="clickClear()">C</button>
+
+      <button onclick="clickNumber(this)">1</button>
+      <button onclick="clickNumber(this)">2</button>
+      <button onclick="clickNumber(this)">3</button>
+      <button onclick="clickNumber(this)">0</button>
+
+
+      <script>
+        // 미션1. 숫자를 클릭해서 위에 입력창에 표시한다(7번).
+        // 미션2: 8번도 입력하기
+        // 미션3: 새로운 숫자로 쓸게 아니고, 원래 있던 숫자 뒤에 이어서 더해서 붙이기
+        function clickNumber(value) {
+          const input = value.innerText;
+          console.log("input: ", input);
+          const inputBox = document.getElementById("result");
+          inputBox.value += input;
+
+        }
+
+        function clickSymbol(symbol) {
+          // 숙제1. 심볼은 하나만 입력되어야함. ++ 이런식으로 입력되면 안 됨
+          // 연산자는 숫자 다음에 와야함
+          const input = symbol.innerText;
+          const inputBox = document.getElementById("result");
+          const lastChar = inputBox.value.slice(-1);
+          console.log("lastChar: ", lastChar);
+          if("+-*/".includes(lastChar)) {
+            return;
+          }
+          inputBox.value += input;
+        }
+
+        // 숙제2. 연산을 실제로 계산해서 결과를 보여주기
+        function clickCalculate(symbol) {
+          const inputBox = document.getElementById("result");
+
+          try {
+            const calculateValue = eval(inputBox.value);
+
+            if(!isFinite(calculateValue) || isNaN(calculateValue)) {
+              throw new Error("무한대이거나 Nan일 경우");
+            }
+          } catch(e) {
+            console.error("계산 에러 나옵니다:", e);
+            alert("계산할 수 없는 값입니다.");
+          }
+
+          inputBox.value = calculateValue
+          console.log("calculateValue: ", calculateValue);
+          console.log("inputBox: ", inputBox);
+        }
+
+        function clickClear() {
+          const inputBox = document.getElementById("result");
+          inputBox.value = "";
+        }
+
+      </script>
+    </div>
+  </body>
+</html>
