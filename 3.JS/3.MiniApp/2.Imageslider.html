@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .slider {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .slider img{
+      width: 200px;
+      height: 200px;
+      display: none;
+    }
+    .slider img.active {
+      display: block;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    #filename{
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Image Slider</h1>
+  <div class="slider">
+    <img id="img1" src="images/dog1.jpeg" class="active" alt="멍멍이1">
+    <img id="img2" src="images/dog2.jpeg" alt="멍멍이2">
+    <img id="img3" src="images/dog3.webp" alt="멍멍이3">
+  </div>
+
+  <div class="filename" id="filename"></div>
+
+  <div class="buttons">
+    <button id="prev">이전</button>
+    <button id="next">다음</button>
+  </div>
+
+  <script>
+    // 1. 버튼 가져다가, 클릭하면 class=ative를 다음거로 이동하기. 파일명 갱신
+    const images = document.querySelectorAll('.slider img');
+    const filename = document.getElementById('filename');
+    let currentIndex = 0;
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+    const totalImages = images.length;
+
+    prevButton.addEventListener('click', function() {
+      images[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      images[currentIndex].classList.add('active');
+      updateFileName();
+    })
+
+    nextButton.addEventListener('click', function() {
+      images[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % totalImages;
+      images[currentIndex].classList.add('active');
+      updateFileName();
+    })
+
+    function updateFileName(){
+      filename.textContent = images[currentIndex].src.split('/').pop();
+    }
+
+    updateFileName(); // 최초 파일 이름 표기하기 위함
+  </script>
+</body>
+</html>

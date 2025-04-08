@@ -26,7 +26,7 @@
   </head>
   <body>
     <div class="calculator">
-      <input type="text" id="result" readonly/>
+      <input type="text" id="result" readonly />
 
       <button onclick="clickSymbol(this)">+</button>
       <button onclick="clickSymbol(this)">-</button>
@@ -48,57 +48,87 @@
       <button onclick="clickNumber(this)">3</button>
       <button onclick="clickNumber(this)">0</button>
 
-
       <script>
         // 미션1. 숫자를 클릭해서 위에 입력창에 표시한다(7번).
         // 미션2: 8번도 입력하기
         // 미션3: 새로운 숫자로 쓸게 아니고, 원래 있던 숫자 뒤에 이어서 더해서 붙이기
+        const inputBox = document.getElementById("result");
         function clickNumber(value) {
           const input = value.innerText;
           console.log("input: ", input);
-          const inputBox = document.getElementById("result");
           inputBox.value += input;
-
         }
 
         function clickSymbol(symbol) {
           // 숙제1. 심볼은 하나만 입력되어야함. ++ 이런식으로 입력되면 안 됨
           // 연산자는 숫자 다음에 와야함
           const input = symbol.innerText;
-          const inputBox = document.getElementById("result");
           const lastChar = inputBox.value.slice(-1);
           console.log("lastChar: ", lastChar);
-          if("+-*/".includes(lastChar)) {
-            return;
+          if (isSymbol(lastChar)) {
+            inputBox.value = inputBox.value.slice(0, -1) + input;
+          } else {
+            inputBox.value += input;
           }
-          inputBox.value += input;
+        }
+
+        // isXXX 시리즈는 그 질문에 대해 true/false로 대답하는 함수
+        function isSymbol(value) {
+          return ["+", "-", "*", "/"].includes(value);
         }
 
         // 숙제2. 연산을 실제로 계산해서 결과를 보여주기
         function clickCalculate(symbol) {
-          const inputBox = document.getElementById("result");
+          // try {
+          //   const calculateValue = eval(inputBox.value);
+          //   console.log("try calculateValue: ", calculateValue);
+          //   inputBox.value = calculateValue
 
-          try {
-            const calculateValue = eval(inputBox.value);
+          //   if(!isFinite(calculateValue) || isNaN(calculateValue)) {
+          //     throw new Error("무한대이거나 NaN일 경우");
+          //   }
+          // } catch(e) {
+          //   console.error("계산 에러 나옵니다:", e);
+          //   alert("계산할 수 없는 값입니다.");
+          // }
 
-            if(!isFinite(calculateValue) || isNaN(calculateValue)) {
-              throw new Error("무한대이거나 Nan일 경우");
+          // if(isDivisionByZero(inputBox.value)) {
+          //   inputBox.value = "0으로 나눌 수 없습니다.";
+          // } else {
+          //   // 마지막 글자가 부호로 끝나는지 확인
+          //   const lastChar = inputBox.value.slice(-1);
+          //   if(isSymbol(lastChar)) {
+          //     inputBox.value = '부호로 끝날 수 없습니다.';
+          //   } else{
+          //     inputBox.value = eval(inputBox.value);
+          //   }
+          // }
+
+          if (isDivisionByZero(inputBox.value)) {
+            inputBox.value = "0으로 나눌 수 없습니다.";
+          } else {
+            try {
+              inputBox.value = eval(inputBox.value);
+            } catch (error) {
+              inputBox.value = "오류!";
             }
-          } catch(e) {
-            console.error("계산 에러 나옵니다:", e);
-            alert("계산할 수 없는 값입니다.");
           }
+        }
 
-          inputBox.value = calculateValue
-          console.log("calculateValue: ", calculateValue);
-          console.log("inputBox: ", inputBox);
+        function isDivisionByZero(expression) {
+          for (let i = 0; i < expression.length; i++) {
+            console.log("expression[i]: ", expression[i]);
+            if (expression[i] === "/") {
+              if (expression[i + 1] === "0") {
+                return true;
+              }
+            }
+          }
         }
 
         function clickClear() {
-          const inputBox = document.getElementById("result");
           inputBox.value = "";
         }
-
       </script>
     </div>
   </body>

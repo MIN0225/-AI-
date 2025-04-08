@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      li.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>실시간 검색 기능</h1>
+    <input type="text" id="searchInput" placeholder="검색..." />
+    <ul id="itemlist">
+      <li>Apple</li>
+      <li>Banana</li>
+      <li>Orange</li>
+      <li>Grape</li>
+      <li>Peach</li>
+      <li>Pear</li>
+      <li>Cherry</li>
+      <li>Watermelon</li>
+      <li>Strawberry</li>
+      <li>Blueberry</li>
+      <li>Kiwi</li>
+      <li>Pineapple</li>
+      <li>Mango</li>
+      <li>Plum</li>
+      <li>Fig</li>
+      <li>Avocado</li>
+      <li>Pomegranate</li>
+      <li>Raspberry</li>
+      <li>Melon</li>
+      <li>Lemon</li>
+    </ul>
+    <script>
+      // 미션1. 실시간 검색 기능을 구현한다.
+      // 미션1-1. 검색창의 입력 결과를 가져온다.
+      
+      const inputBox = document.getElementById("searchInput");
+      const itemList = document.getElementById("itemlist");
+      const items = itemList.querySelectorAll('li');
+      console.log("items:", items);
+      
+      // 미션1-2. 해당 단어를 목록에 "포함"되어 있는지 확인한다. (includes라는 내장함수 사용)
+      inputBox.addEventListener('keyup', (e) => {
+        // 변환시키는 방법
+        // 1. 기존의 items를 Array.from()에 넣고 Casting
+        // 2. 스프레드 연산자 (...) 문법을 통해서 안에 있는 (적절하게 패킹되어 있는 걸 개별 요소로 풀어주는 연산자)
+
+        // 방법1.
+        // Array.from(items).forEach((item) => {
+        //     console.log(item);
+        // }
+
+        // 방법2. 스프레드 연산자로 리스트로 풀어주기
+        // [...items].forEach((item) =>{
+        //      console.log(item);
+        // })
+
+        // 방법3. 애초에 HTMLCollection으로 만들지 않음.. 그냥 NodeList라고 불리는 리스트 형태로 만듦
+
+
+        items.forEach(li => {
+          const text = li.textContent.toLowerCase();
+          if(text.includes(inputBox.value.toLowerCase())){
+            li.style.display = '';
+          } else{
+            // 미션1-3. 해당되는 것은 보여주고, 해당하지 않는 것을 숨긴다. (display: none)
+            li.style.display = 'none';
+          }
+        })
+      });
+      
+    </script>
+  </body>
+</html>

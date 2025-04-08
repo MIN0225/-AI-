@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<style>
+  #stopwatch {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+  #stopwatch {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+  }
+</style>
+<body>
+  <div id="stopwatch">00:00:00</div>
+  <div class="button-container">
+    <button id="start-btn">start</button>
+    <button id="stop-btn">stop</button>
+    <button id="reset-btn">reset</button>
+  </div>
+  <script>
+    const stopwatch = document.getElementById("stopwatch");
+    const startBtn = document.getElementById("start-btn");
+    const stopBtn = document.getElementById("stop-btn");
+    const resetBtn = document.getElementById("reset-btn");
+
+    let seconds = 0;
+    let interval = null;
+
+    startBtn.addEventListener('click', startTime);
+    stopBtn.addEventListener('click', stopTime);
+    resetBtn.addEventListener('click', resetTime);
+
+    function handleTime() {
+      seconds++;
+
+      let hours = String(Math.floor(seconds / 3600)).padStart(2, '0');
+      let mins = String(Math.floor((seconds - hours * 3600) / 60)).padStart(2, "0");
+      let secs = String(seconds % 60).padStart(2, '0');
+
+      stopwatch.textContent = `${hours}:${mins}:${secs}`;
+    }
+
+    function startTime() {
+      console.log("start 누름");
+      if(interval) {
+        return;
+      } else {
+        interval = setInterval(handleTime, 1000);
+      }
+    }
+    
+    function stopTime() {
+      console.log("stop 누름");
+      clearInterval(interval);
+      interval = null;
+    }
+    
+    function resetTime() {
+      console.log("reset 누름");
+      stopTime();
+      seconds = 0;
+      stopwatch.textContent = '00:00:00';
+    }
+
+  </script>
+</body>
+</html>

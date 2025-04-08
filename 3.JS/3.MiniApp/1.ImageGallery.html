@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .gallery img {
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    .gallery {
+      display: flex;
+
+    }
+
+    #dropZone {
+      width: 200px;
+      height: 200px;
+      border: 2px dashed #c44c4c;
+    }
+  </style>
+</head>
+<body>
+  <h1>Image Gallery</h1>
+  <div class="gallery">
+    <img id="img1" draggable = "true" src="./images/dog1.jpeg" alt="">
+    <img id="img2" draggable = "true" src="./images/dog2.jpeg" alt="">
+    <img id="img3" draggable = "true" src="./images/dog3.webp" alt="">
+  </div>
+
+  <!-- <img src="" alt="큰 멍멍이" id="large-image"> -->
+
+  <div class="large-image-container">
+
+  </div>
+
+  <script>
+    // 미션1. 마우스로 클릭한 이미지 크게 보여주기
+
+    // const img1 = document.getElementById('img1');
+    // const img2 = document.getElementById('img2');
+    // const img3 = document.getElementById('img3');
+    const largeImage = document.getElementById('large-image');
+    // const images = [img1, img2, img3];
+    // =================================
+    // 방법1. 더미 빈 이미지를 사용해서 src 치환
+    // =================================
+
+    // for (let i = 0; i < images.length; i++) {
+    //   images[i].addEventListener('click', function() {
+    //     largeImage.src =images[i].src;
+    //     largeImage.style.display = 'block';
+    //   })
+    // }
+    
+    // images.forEach(img => {
+    //   img.addEventListener('click', function() {
+    //     largeImage.src = img.src;
+    //     largeImage.style.display = 'block';
+    //   })
+    // })
+
+    // 변수조차 사전에 선언 안 하고, LoC를 최소화한 형태
+    // document.querySelectorAll('.gallery img').forEach(img => {
+    //   img.addEventListener('click', function() {
+    //     largeImage.src = img.src;
+    //     largeImage.style.display = 'block';
+    //   })
+    // })
+
+
+     // =================================
+    // 방법2. 더미 div를 사용해서 img 삽입
+    // =================================
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', function() {
+        // img 추가
+        const newImg = document.createElement('img');
+        newImg.src = img.src;
+        newImg.style.maxWidth = "100%";
+        newImg.style.margin = '20px auto';
+
+        const container = document.getElementsByClassName('large-image-container')[0];
+        container.innerHTML = '';
+        container.appendChild(newImg);
+      })
+    })
+
+  </script>
+</body>
+</html>
