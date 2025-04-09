@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      canvas {
+        border: 1px dotted black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const context = canvas.getContext('2d');
+
+      const graphData = {
+        A: 10,
+        B: 20,
+        C: 40,
+        D: 60,
+        E: 80,
+      }
+
+      drawBarGraph(graphData);
+
+      function drawBarGraph(data) {
+        const barWidth = 30;
+        const barHeightOffset = 40;
+        let startX = 20;
+
+        for(const key in data) {
+          const barHeight = data[key];
+          // console.log(barHeight);
+          context.fillStyle = 'blue';
+          context.fillRect(startX, canvas.height - barHeight - barHeightOffset, barWidth, barHeight);
+          
+          context.fillStyle = 'red';
+          context.fillText(key, startX + barWidth / 2, canvas.height - 20);
+          startX = startX + 50; // 하나 다 그리면, 다음 위치로 이동하기 위한 좌표를 계산하기 위함
+        }
+      }
+    </script>
+  </body>
+</html>

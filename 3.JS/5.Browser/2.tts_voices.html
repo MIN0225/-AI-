@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>TTS 예제</h1>
+    <textarea id="text" rows="4" cols="50">
+Hello, this is a text-to-speech example</textarea
+    >
+    <div class="controls">
+      <select name="" id="voiceSelect"></select>
+      <button id="speakButton">말하기</button>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const textInput = document.getElementById("text");
+        const voiceSelect = document.getElementById("voiceSelect");
+        const speakButton = document.getElementById("speakButton");
+
+        // Web Speech API를 지원하느냐?
+        if ("speechSynthesis" in window) {
+          console.log("지원함");
+
+          function updateVoices(){
+
+            const voices = window.speechSynthesis.getVoices();
+            console.log('사용가능한 목소리 리스트:', voices);
+
+            voiceSelect.innerHTML = '';
+            voices.forEach((voice, index) => {
+              const option = document.createElement('option');
+              option.value = index;
+              option.text = `${voice.name} (${voice.lang})`;
+              voiceSelect.add(option);
+            })
+          };
+
+          window.speechSynthesis.addEventListener("voiceschanged", updateVoices);
+
+          // 초기 목소리 목록 갱신
+          updateVoices();
+
+          function speak() {
+            const selectedVoiceIndex = voiceSelect.value;
+            const selectedVoice = window.speechSynthesis.getVoices()[selectedVoiceIndex];
+            const textToSpeak = textInput.value;
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            utterance.voice = selectedVoice;
+            speechSynthesis.speak(utterance);
+          }
+
+          speakButton.addEventListener('click', speak);
+        } else {
+          console.log("음성 지원 안하는 브라우저임");
+          alert('죄송합니다. 이 브라우저는 TTS기능을지원하지 않습니다.');
+        }
+      });
+    </script>
+  </body>
+</html>

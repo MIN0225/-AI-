@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      canvas {
+        border: 1px dotted black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+      let x = 0;
+      let direction = 1;
+      const BOX_SIZE = 50;
+      const START_Y = 100;
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "red";
+        ctx.fillRect(x, START_Y, BOX_SIZE, BOX_SIZE);
+        // 미션1. 이 네모가 끝까지 간 다음에 앞으로 나오는 게, 아니라 거꾸로 나오게 하려면?
+
+          x += 1 * direction;
+          if (x > canvas.width - BOX_SIZE) {
+            console.log("오른쪽 넘어감");
+            direction = -1;
+          }
+          if (x < 0){
+            direction = 1;
+          }
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    </script>
+  </body>
+</html>

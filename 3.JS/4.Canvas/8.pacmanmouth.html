@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      canvas {
+        border: 1px dotted white;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+      
+      let pacman = {
+        x: 350,
+        y: 200,
+        size: 30,
+        startAngle: 0.2 * Math.PI,
+        endAngle: 1.8 * Math.PI,
+        angleIncrement: 0.02 * Math.PI, // 입이 이동하는 속도
+        directionX: 1,
+        directionY: 0,
+        speed: 1,
+        mouthOpen: 1,
+      }
+
+      let direction1 = 1; // 입이 이동하는 방향
+      let direction2 = 1; // 입이 이동하는 방향
+
+      function drawPacman() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        ctx.moveTo(pacman.x, pacman.y);
+        ctx.arc(pacman.x, pacman.y, pacman.size, pacman.startAngle, pacman.endAngle);
+        ctx.fillStyle = 'yellow';
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      function updateAngles() {
+        let mouthGap = pacman.endAngle - pacman.startAngle;
+
+        
+
+        pacman.startAngle += pacman.angleIncrement * pacman.mouthOpen;
+        pacman.endAngle -= pacman.angleIncrement * pacman.mouthOpen;
+      }
+
+      function updatePacmanPosition() {
+        pacman.x += pacman.directionX;
+        pacman.y += pacman.directionY;
+        if(pacman.x > canvas.width - pacman.size){
+          pacman.x = canvas.width - pacman.size;
+        }
+        if(pacman.x < 0 + pacman.size) {
+          pacman.x = 0 + pacman.size;
+        }
+
+        if(pacman.y > canvas.height - pacman.size) {
+          pacman.y = canvas.height - pacman.size;
+        }
+        if(pacman.y < pacman.size) {
+          pacman.y = pacman.size;
+        }
+      }
+
+      function animate(){
+        updatePacmanPosition();
+        drawPacman();
+        updateAngles();
+        requestAnimationFrame(animate);
+      }
+
+      function handleKeyDown(e) {
+        // 미션1. 여기에다가, 키 좌우에 따라서 directionX를 적절하게
+        if(e.key === 'ArrowLeft'){ //왼쪽
+          pacman.directionX = -1
+          pacman.directionY = 0;
+          pacman.startAngle = 0.8 * Math.PI;
+          pacman.endAngle = 1.2 * Math.PI;
+        } else if(e.key === 'ArrowRight') {
+          pacman.directionX = 1;
+          pacman.directionY = 0;
+          pacman.startAngle = 0.2 * Math.PI;
+          pacman.endAngle = 1.8 * Math.PI;
+        } else if(e.key === 'ArrowUp') {
+          pacman.directionY = -1;
+          pacman.directionX = 0;
+          pacman.startAngle = 1.3 * Math.PI;
+          pacman.endAngle = 1.7 * Math.PI;
+        } else if(e.key === 'ArrowDown') {
+          pacman.directionY = 1;
+          pacman.directionX = 0;
+          pacman.startAngle = 0.3 * Math.PI;
+          pacman.endAngle = 0.7 * Math.PI;
+        }
+      }
+
+      document.addEventListener('keydown', handleKeyDown)
+
+      animate();
+    </script>
+  </body>
+</html>

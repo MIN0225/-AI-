@@ -5,18 +5,34 @@
   <title>Document</title>
 </head>
 <style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: rgb(189, 187, 187);
+  }
   #stopwatch {
     font-size: 32px;
     font-weight: bold;
   }
   .button-container {
     display: flex;
+    gap: 10px;
     justify-content: center;
   }
   #stopwatch {
     display: flex;
     justify-content: center;
     margin: 30px;
+    font-size: 50px;
+  }
+  .button-container button {
+    border: 1px solid black;
+    padding: 10px 20px;
+    margin: 3px;
   }
 </style>
 <body>
@@ -35,10 +51,12 @@
     let seconds = 0;
     let interval = null;
 
-    startBtn.addEventListener('click', startTime);
-    stopBtn.addEventListener('click', stopTime);
-    resetBtn.addEventListener('click', resetTime);
+    // startBtn.addEventListener('click', startTime);
+    // stopBtn.addEventListener('click', stopTime);
+    // resetBtn.addEventListener('click', resetTime);
 
+    
+    
     function handleTime() {
       seconds++;
 
@@ -68,6 +86,60 @@
       console.log("reset 누름");
       stopTime();
       seconds = 0;
+      stopwatch.textContent = '00:00:00';
+    }
+
+    // ===================================
+    // 4/9(수) 수업 실습
+
+    let start; // 스탑워치 시작 시간
+    let updatedTime; // 업데이트된 시간
+    let timerInterval;
+    let diff = 0; // 경과시간
+    let running = false; // 스탑워치의 실행 여부 (현재 실행중이냐 아니냐)
+
+    const HOUR_MS = 1000 * 60 * 60;
+    const MINUTE_MS = 1000 * 60;
+
+    startBtn.addEventListener('click', startTimer);
+    stopBtn.addEventListener('click', stopTimer);
+    resetBtn.addEventListener('click', resetTimer);
+
+    function startTimer() {
+      if(!running) {
+        start = new Date().getTime() -(diff);
+        timerInterval = setInterval(updateTimer, 10); // 10 ms 단위
+        running = true;
+      } else {
+        return;
+      }
+    }
+
+    function updateTimer() {
+      console.log("updateTimer 실행");
+      updatedTime = new Date().getTime(); // 현재 시간 저장
+      diff = updatedTime - start; // 경과 시간 계산 (ms)
+
+      let minutes = Math.floor(diff % HOUR_MS / (1000 * 60)); // 시간 빼고 분 계산 
+      let seconds = Math.floor(diff % MINUTE_MS / 1000); // 분 빼고 초 계산
+      let milliseconds = Math.floor((diff % 1000) / 10); // 초 빼고 나머지에서 밀리초 계산
+
+      stopwatch.textContent = 
+      (minutes < 10 ? '0' + minutes : minutes) + ":" + 
+      (seconds < 10 ? '0' + seconds : seconds) + ":" + 
+      (milliseconds < 10 ? '0' + milliseconds : milliseconds);
+    }
+
+    function stopTimer() {
+      console.log("stop 누름");
+      clearInterval(timerInterval);
+      running = false;
+    }
+    
+    function resetTimer() {
+      console.log("reset 누름")
+      clearInterval(timerInterval);
+      diff = 0;
       stopwatch.textContent = '00:00:00';
     }
 
