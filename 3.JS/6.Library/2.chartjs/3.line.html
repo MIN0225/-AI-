@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="400" height="600"></canvas>
+
+    <script>
+      const ctx = document.getElementById('myCanvas').getContext("2d");
+
+      const Utils = {
+        months({count}) { // destructuring (구조 분할)
+          const months = ['Jan', 'Feb', 'Mar', 'Apr', "May", "Jun", "Jul", 'Aug', 'Sep', 'Oct', 'Nov', "Dec"];
+          return months.slice(0, count);
+        }
+      }
+
+      // const labels = ['Jan', 'Feb', 'Mar', 'Apr', "May", "Jun", "Jul"]
+      
+      const labels = Utils.months({count: 7});
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "My First Dataset",
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: "rgb(75, 192, 192)",
+            tension: 0.1,
+          },
+          {
+            label: "datasets 두 번째 값",
+            data: [23, 100, 20, 11, 90, 15, 40],
+            fill: true,
+            borderColor: "rgb(75, 12, 92)",
+            tension: 0.1,
+          },
+          {
+            label: "datasets 세 번째 값",
+            data: [13, 50, 60, 71, 15, 54, 90],
+            fill: true,
+            borderColor: "rgb(175, 62, 22)",
+            tension: 0.1,
+          },
+        ],
+      };
+      const config = {
+        type: "line",
+        data: data,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            }
+          },
+          responsive: false, // 반응형 끄기
+          maintainAspectRatio: true, // 비율을 유지할 거냐 말거냐
+        }
+      };
+
+      const myChart = new Chart(ctx, config);
+    </script>
+  </body>
+</html>

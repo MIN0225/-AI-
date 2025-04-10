@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <canvas id="myChart"></canvas>
+
+    <script>
+      const ctx = document.getElementById("myChart").getContext("2d");
+
+      const barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['A', 'B', 'C', 'D', 'E'],
+          datasets: [
+            {
+              label: 'Title of my chart',
+              data: [12, 9, 3, 5, 2],
+            }
+          ]
+        }
+      });
+      
+    </script>
+  </body>
+</html>
