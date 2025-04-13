@@ -29,6 +29,10 @@
     <div class="container m-4">
       <div id="result"></div>
     </div>
+    
+    <div class="container m-4">
+      <div id="clearingData"></div>
+    </div>
 
     <script>
       const loadButton = document.getElementById("loadButton");
@@ -36,6 +40,7 @@
       const clearButton = document.getElementById("clearButton");
       const clearButtonSpinner = clearButton.querySelector(".spinner-border");
       const result = document.getElementById("result");
+      const clearingData = document.getElementById('clearingData');
       clearButton.disabled = true;
 
       loadButton.addEventListener("click", () => {
@@ -62,9 +67,19 @@
       clearButton.addEventListener("click", () => {
         clearButton.disabled = true;
         clearButtonSpinner.classList.remove("d-none");
+        clearingData.classList.remove('d-none');
+        clearingData.innerHTML = `
+          <div class = "alert alert-warning">
+            <h5>
+              <div class="spinner-border spinner-border-sm text-danger" id="clearingSpinner"></div>
+              Clearing Data
+            </h5>
+          </div>
+        `;
         function clearResult() {
           result.innerHTML = "";
           clearButtonSpinner.classList.add("d-none");
+          clearingData.classList.add('d-none');
         }
         setTimeout(clearResult, 1000);
       });
