@@ -1,0 +1,3 @@
+writeFileSync 쓰고 싶은 내용
+writeFileSync 쓰고 싶은 내용 append
+writeFileSync 쓰고 싶은 내용 append
