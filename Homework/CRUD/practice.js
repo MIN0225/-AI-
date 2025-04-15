@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const path = require('path');
 const app = express();
 const port = 3000;
-const users = {};
+const users = [];
 let nextId = 1;
 
 app.use(morgan('dev'));
@@ -15,22 +15,31 @@ app.get('/', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
-  res.json(users);
+  const userMap = {};
+  users.forEach(user => {
+    if (user) {
+      userMap[user.id] = user;
+    }
+  })
+  res.json(userMap);
 })
 
 app.post('/users', (req, res) => {
-  users[nextId++] = {
+  const user = {
+    id: nextId++,
     nickname: req.body.nickname,
     name: req.body.name,
-    age: req.body.age,
+    age: req.body.age
   };
-  res.send(`${req.body.name} POST 성공`);
+  users[user.id] = user;
+  res.send(`${user.name} POST 성공`);
 })
 
 app.put('/users/:id', (req, res) => {
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
   if (users[id]) {
     users[id] = {
+      id,
       nickname: req.body.nickname,
       name: req.body.name,
       age: req.body.age
@@ -42,7 +51,7 @@ app.put('/users/:id', (req, res) => {
 })
 
 app.delete('/users/:id', (req, res) => {
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
   if (users[id]) {
     delete users[id];
     res.send(`ID: ${id}번 DELETE 완료`)
