@@ -19,17 +19,30 @@ function createItemElement(text, index) {
 }
 
 // 오래된 아이템 제거
-function removeExcessItems() {
-  const items = scrollContainer.querySelectorAll('.item');
+function removeExcessItems(direction = 'down') {
+  // const items = scrollContainer.querySelectorAll('.item');
+  const items = Array.from(scrollContainer.querySelectorAll('.item'));
+  console.log('items:', items);
+  if (items.length <= MAX_ITEMS) return;
 
-  if (items.length > MAX_ITEMS) {
-    const excess = items.length - MAX_ITEMS;
-    for (let i = 0; i < excess; i++){
-      scrollContainer.removeChild(items[i]);
+  const excess = items.length - MAX_ITEMS;
+
+  if (direction === 'down') {
+    const toRemove = items.slice(0, excess); // 위쪽 제거
+    toRemove.forEach(item => scrollContainer.removeChild(item));
+
+    const remaining = scrollContainer.querySelectorAll('.item');
+    if (remaining.length > 0) {
+      topIndex = parseInt(remaining[0].dataset.index);
     }
-
-    if (items[excess]) {
-      topIndex = parseInt(items[excess].dataset.index);
+  } else if (direction === 'up') {
+    for (let i = items.length - 1; i >= 0; i--){
+      const rect = items[i].getBoundingClientRect();
+      if (rect.top > window.innerHeight + 200) {
+        scrollContainer.removeChild(items[i]);
+      } else {
+        break;
+      }
     }
   }
 }
@@ -50,10 +63,11 @@ async function loadItems(direction = 'down') {
       scrollContainer.appendChild(item);
     });
 
-    removeExcessItems();
+    removeExcessItems('down');
 
     start = end;
     end += NUM_OF_ITEMS_PER_PAGE;
+
   } else if (direction === 'up') {
     if(topIndex <= 0) return;
 
@@ -69,6 +83,8 @@ async function loadItems(direction = 'down') {
 
     scrollContainer.prepend(fragment);
     topIndex = newStart;
+
+    removeExcessItems('up');
   }
 }
 
