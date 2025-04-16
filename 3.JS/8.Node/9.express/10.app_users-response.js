@@ -15,37 +15,56 @@ app.get('/', (req, res) => {
 
 app.use(express.static('public'));
 
+
 app.get('/users', (req, res) => {
   console.log('/users GET 요청 들어옴');
+  console.log('요청 안에 뭐가 있나?', req);
   // res.send(users); // text/html 문자열
   res.json(users); // application/json
 })
 
 app.post('/users', (req, res) => {
   console.log('/users POST 요청 들어옴');
-  users[nextId++] = req.body.name;
-  res.send(`${req.body.name} 성공`);
+
+  try {
+    
+    const name = req.body.name;
+    
+    users[nextId++] = name;
+    // res.send(`${req.body.name} 성공`);
+    res.status(201).send('등록 성공');
+  } catch (error) {
+    res.status(500).send('서버 내부 오류');
+  }
 })
 
 app.put('/users/:id', (req, res) => {
   console.log('/users:id PUT 요청 들어옴');
-  const id = req.params.id;
-  if (users[id]) { 
-    users[id] = req.body.name;
-    res.send(`${id}: ${req.body.name} PUT 성공`);
-  } else {
-    res.status(404).send('유저가 존재하지 않음');
+  try {
+    const id = req.params.id;
+    if (users[id]) { 
+      users[id] = req.body.name;
+      res.send(`${id}: ${req.body.name} PUT 성공`);
+    } else {
+      res.status(404).send('유저가 존재하지 않음');
+    }
+  } catch (error) {
+    res.status(500).send('서버 내부 오류');
   }
 })
 
 app.delete('/users/:id', (req, res) => {
   console.log('/users:id DELETE 요청 들어옴');
-  const id = req.params.id;
-  if (users[id]) { 
-    delete users[id];
-    res.send(`${id}번 DELETE 완료`);
-  } else {
-    res.status(404).send('유저가 존재하지 않음');
+  try {
+    const id = req.params.id;
+    if (users[id]) { 
+      delete users[id];
+      res.status(204).send();
+    } else {
+      res.status(404).send(`해당 사용자(ID:${id}는 존재하지 않습니다.`);
+    }
+  } catch (error) {
+    res.status(500).send('서버 내부 오류');
   }
 })
 
