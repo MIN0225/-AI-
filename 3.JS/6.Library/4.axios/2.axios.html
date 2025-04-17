@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Axios를 사용한 외부요청</h1>
+    <button id="loadDataBtn">데이터 로드</button>
+    <button id="postDataBtn">데이터 전송</button>
+    <button id="loadImageBtn">이미지 로드</button>
+    <div id="result"></div>
+
+    <script>
+      document
+        .getElementById("loadDataBtn")
+        .addEventListener("click", async () => {
+          try {
+            const response = await axios.get(
+              "https://jsonplaceholder.typicode.com/posts/1"
+            );
+            const data = response.data;
+            document.getElementById("result").innerHTML = `
+          <p><strong>타이틀:</strong>${data.title}</p>
+          <p><strong>본문:</strong>${data.body}</p>
+          `;
+          } catch (err) {
+            document.getElementById("result").innerHTML = `
+                    <p>오류가 발생했습니다.</p>
+        `;
+          }
+        });
+
+      // 미션. fetch.html fetch POST를 axios로 바꾼다.
+      document.getElementById('postDataBtn').addEventListener('click', async () => {
+        const postData = {
+          title: 'haha',
+          body: 'hoho',
+          userId: 11
+        };
+        try{
+
+          const response = await axios.post('https://jsonplaceholder.typicode.com/posts', postData);
+          const data = response.data;
+          console.log('data:', data);
+          document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+
+        } catch(error){
+          document.getElementById("result").innerHTML = `
+            <p>오류가 발생했습니다.</p>
+          `;
+        }
+      })
+
+      // 미션3. fetch.html의 fetch 코드를 axios로 구현
+      document.getElementById('loadImageBtn').addEventListener('click', async () => {
+        const response = await axios.get('https://dog.ceo/api/breeds/image/random')
+        const imageUrl = response.data.message;
+        console.log('imageUrl:', imageUrl);
+        document.getElementById('result').innerHTML = `
+          <img src=${imageUrl}>
+        `
+      })
+    </script>
+  </body>
+</html>
