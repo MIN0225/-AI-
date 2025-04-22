@@ -5,3 +5,8 @@ chromedriver
 # Credential은 커밋 제외
 secret.txt
 .env
+
+# DB 파일 커밋 제외
+*.db
+*.sqlite
+*.sqlite3
