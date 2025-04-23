@@ -154,7 +154,7 @@ app.delete('/api/products/:productid', (req, res) => {
   const productId = req.params.productid;
   
   if (!req.session.cart) {
-    return res.status(400).json({ message: '장바구니가 비어 있습니다.' });
+    res.status(400).json({ message: '장바구니가 비어 있습니다.' });
   }
 
   const index = req.session.cart.findIndex(p => p.id == productId); 
@@ -165,6 +165,18 @@ app.delete('/api/products/:productid', (req, res) => {
   } else {
     res.status(404).json({ message: '상품을 찾을 수 없습니다.' });
   }
+})
+
+app.get('/api/products/totals', (req, res) => {
+  // cart가 없으면 빈 배열로 초기화
+  const cart = req.session.cart || [];
+
+  let sum = 0;
+  for (let i = 0; i < cart.length; i++) {
+    const item = req.session.cart[i];
+    sum += item.price * item.quantity;
+  }
+  res.json({ total: sum });
 })
 
 

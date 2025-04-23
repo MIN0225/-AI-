@@ -71,4 +71,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     actionCell.appendChild(removeButton);
   });
+
+  const res = await fetch('/api/products/totals');
+  const data = await res.json();
+  const totalTag = document.getElementById('totalPrice');
+  console.log(data.total);
+  totalTag.innerText = `가격합산: ${data.total}`;
+
 });
