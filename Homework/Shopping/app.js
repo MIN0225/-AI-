@@ -150,6 +150,24 @@ app.patch('/api/carts/minus/:productid', (req, res) => {
 
 })
 
+app.delete('/api/products/:productid', (req, res) => {
+  const productId = req.params.productid;
+  
+  if (!req.session.cart) {
+    return res.status(400).json({ message: '장바구니가 비어 있습니다.' });
+  }
+
+  const index = req.session.cart.findIndex(p => p.id == productId); 
+
+  if (index !== -1) {
+    req.session.cart.splice(index, 1); // index번째 상품 삭제
+    res.json({ message: '상품이 장바구니에서 삭제되었습니다.', cart: req.session.cart });
+  } else {
+    res.status(404).json({ message: '상품을 찾을 수 없습니다.' });
+  }
+})
+
+
 app.listen(port, (req, res) => {
   console.log(`${port}번 포트에서 서버 리슨 중`);
 })

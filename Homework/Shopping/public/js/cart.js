@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     nameCell.textContent = cartItem.name;
 
     const priceCell = row.insertCell(); // <td> 추가
-    priceCell.textContent = cartItem.name;
+    priceCell.textContent = cartItem.price;
 
     const quantityCell = row.insertCell(); // <td> 추가
     quantityCell.textContent = cartItem.quantity;
@@ -51,5 +51,24 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     quantityCell.appendChild(minusButton);
     quantityCell.appendChild(plusButton);
+
+    const actionCell = row.insertCell(); // <td> 추가
+    actionCell.textContent = '이거 누르면 세션에서 삭제';
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = '삭제';
+    removeButton.addEventListener('click', async () => {
+      const response = await fetch(`/api/products/${cartItem.id}`, {
+        method: 'DELETE',
+      })
+
+      if (response.ok) {
+        row.remove();
+      } else {
+        console.log("삭제 실패");
+      }
+    })
+    
+    actionCell.appendChild(removeButton);
   });
 });
