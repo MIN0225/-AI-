@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      #profile {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="menuContainer">
+      <nav>
+        <ul>
+          <li><a href="/home"></a>HOME</li>
+          <li><a href="/product"></a>PRODUCT</li>
+          <li><a href="/cart"></a>CART</li>
+        </ul>
+      </nav>
+    </div>
+
+      <div id="loginFormContainer">
+
+        <h1>Login</h1>
+        <form action="/api/login" method="post">
+          <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="username"
+          /><br />
+          <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="password"
+          /><br />
+          <button type="submit" id="login">Login</button>
+        </form>
+      </div>
+        
+    <div id="profile">
+      <h2>안녕하세요, <span id="usernameSpan"></span> 님</h2>
+    </div>
+
+    <script src="js/home.js"></script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <nav class="crumbs">
+    <ul>
+      <li class="crumb"><a href="/login2.html">Home</a></li>
+      <li class="crumb"><a href="/product.html">Products</a></li>
+      <li class="crumb">Cart</li>
+    </ul>
+  </nav>
+  <h1>장바구니</h1>
+  <div id="cart">
+
+  </div>
+
+  <script>
+    const cart = document.getElementById('cart');
+    window.onload = async () => {
+      const res = await fetch('/carts');
+      
+      if(res.ok){
+        const cartItems = await res.json();
+        console.log(`cartItems: ${cartItems}`)
+        cartItems.forEach((item) => {
+          const p = document.createElement('p');
+          console.log(`item.id: ${item.id}`);
+          p.textContent = `${item.id} ${item.name} ${item.price}`;
+          cart.appendChild(p);
+
+        })
+      }
+    }
+  </script>
+</body>
+</html>

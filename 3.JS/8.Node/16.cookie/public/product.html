@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="crumbs">
+      <ul>
+        <li class="crumb"><a href="/login2.html">Home</a></li>
+        <li class="crumb"><a href="#">Products</a></li>
+        <li class="crumb"><a href="/cart.html">Cart</a></li>
+      </ul>
+    </nav>
+    <h1>상품목록</h1>
+
+    <div id="product-container"></div>
+    <script>
+      const productContainer = document.getElementById("product-container");
+      window.onload = async () => {
+        const res = await fetch("/products");
+
+        if (res.ok) {
+          products = await res.json();
+          products.forEach((element) => {
+            const p = document.createElement("p");
+            p.textContent = `${element.id} ${element.name} ${element.price}`;
+            productContainer.appendChild(p);
+
+            const addCart = document.createElement('button');
+            addCart.textContent = "담기";
+            addCart.id = "cart" + element.id;
+            addCart.addEventListener('click', async () => {
+              const res = await fetch('/add', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(element),
+              })
+            });
+
+            productContainer.appendChild(addCart);
+          });
+        }
+      };
+    </script>
+  </body>
+</html>
