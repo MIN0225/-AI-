@@ -1,7 +1,6 @@
 const express = require("express");
 const session = require("express-session");
 const morgan = require("morgan");
-const sqlite3 = require("sqlite3");
 const path = require("path");
 const sqlite = require("sqlite3");
 
