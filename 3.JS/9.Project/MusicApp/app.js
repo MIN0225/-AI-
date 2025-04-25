@@ -43,9 +43,9 @@ app.get('/api/musics/:keyword', (req, res) => {
   const keyword = req.params.keyword;
   const search = `%${keyword}%`; // LIKE용 와일드카드
 
-  const query = 'SELECT * FROM music WHERE title LIKE ? OR artist LIKE ?';
+  const query = 'SELECT * FROM music WHERE title LIKE ? OR artist LIKE ? OR hashtag LIKE ?';
 
-  db.all(query, [search, search], (err, rows) => {
+  db.all(query, [search, search, search], (err, rows) => {
     if (err) {
       console.error('SQLite query 에러:', err.message);
       res.status(500).json({ error: 'Database Error' });
