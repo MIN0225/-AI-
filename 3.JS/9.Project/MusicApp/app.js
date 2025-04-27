@@ -82,6 +82,26 @@ app.post("/api/register", (req, res) => {
   });
 });
 
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  const query = 'SELECT * FROM user WHERE username = ?';
+  db.get(query, [username], async (err, row) => {
+    if (err) {
+      res.status(500).json({ message: "로그인: DB 유저 조회 에러" });
+    } else if (row) {
+      const match = await bcrypt.compare(password, row.password);
+      if (match) {
+        res.status(200).json({ message: "로그인 성공" });
+      } else {
+        res.status(401).json({ message: "비밀번호가 틀렸습니다." });
+      }
+    }
+    else {
+      res.status(404).json({ message: "가입된 사용자가 없습니다." });
+    }
+  });
+});
+
 app.listen(port, (req, res) => {
   console.log("서버 레디");
   // initDatabase();
