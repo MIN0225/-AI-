@@ -64,13 +64,13 @@ app.post("/api/chat", async (req, res) => {
     }
 
     const previousConversation = getRecentConversation(sessionId);
-    console.log('getRecentConversation()완료: ', previousConversation);
+    // console.log('getRecentConversation()완료: ', previousConversation);
     saveMessage('user', userInput, sessionId);
 
     const chatGPTResponse = await getChatGPTResponse(previousConversation);
     console.log("ChatGPT response:", chatGPTResponse);
     console.log("-----");
-    console.log('보낼전체대화내용:', previousConversation);
+    console.log('보낼 전체 대화내용:', previousConversation);
     console.log("-----");
     // conversationHistory.push({role: 'assistant', content: chatGPTResponse})
     saveMessage('assistant', chatGPTResponse, sessionId);

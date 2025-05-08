@@ -1,8 +1,7 @@
-import os
 from dotenv import load_dotenv
 from openai import OpenAI
 
-# load_dotenv() # 현재 폴더의 .env 읽어오기
+# load_dotenv() # 현재 폴더의 .env 읽어오기  이렇게 해도 .env 읽어오긴 한다.
 load_dotenv(dotenv_path='../.env')
 
 # client = OpenAI(
