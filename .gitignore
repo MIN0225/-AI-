@@ -10,3 +10,6 @@ secret.txt
 *.db
 *.sqlite
 *.sqlite3
+
+# 다운로드 받은 이미지 파일
+DATA/
