@@ -12,7 +12,6 @@ load_dotenv()
 
 # 1. 텍스트 문서 읽기
 loader = TextLoader('./my-docs.txt', encoding='utf-8')
-
 documents = loader.load()
 
 # 2. 문서 안의 내용을 vector화 해서 저장

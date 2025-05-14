@@ -13,3 +13,9 @@ secret.txt
 
 # 다운로드 받은 이미지 파일
 DATA/
+chroma_db/
+PDF/
+.pdf
+
+# 파이썬 컴파일 파일 제외
+*.pyc
