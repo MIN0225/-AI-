@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <h1>투두 리스트</h1>
+  <input type="text" id="new-todo" placeholder="할 일 적기...">
+  <button id="add-todo">Add</button>
+  <ul id="todo-list"></ul>
+
+  <script>
+    const todoList = document.getElementById('todo-list');
+    const input = document.getElementById('new-todo');
+    const addBtn = document.getElementById('add-todo')
+
+    function updateTodo(){
+
+    }
+
+    function deleteTodo(){
+
+    }
+
+    // 버튼 클릭시 추가 호출
+    addBtn.addEventListener('click', async () => {
+      // 입력값 읽어다가 백엔드 호출 (/api/todos) POST
+      const text = input.value.trim();
+
+      const response = await axios.post('/api/todos', {text})
+      const data = response.data;
+      renderTodos(data);
+    })
+    // addBtn.addEventListener('click', async () => {
+    //   // 입력값 읽어다가 백엔드 호출 (/api/todos) POST
+    //   console.log("클릭")
+    //   const todoText = input.value.trim();
+
+    //   if(todoText){
+    //     const response = await fetch('/api/todos', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type':'application/json'
+    //       },
+    //       body: JSON.stringify({text: todoText})
+    //     })
+    //     const data = await response.json();
+    //     input.value = '';
+    //     renderTodos()
+    //   }
+    // })
+
+    // 화면에 투두리스트 가져와서 뿌리기 (렌더링)
+    async function renderTodos(todos) {
+      // 백엔드에서 받아오기 (/api/todos) GET
+      const response = await axios.get('/api/todos')
+      const data = response.data;
+      todos.forEach(todo => {
+        const li = document.createElement('li');
+        li.textContent = todo.text;
+        todoList.append(li);
+      })
+    }
+    // async function renderTodos(todos) {
+    //   // 백엔드에서 받아오기 (/api/todos) GET
+    //   const response = await fetch('/api/todos')
+    //   todos = await response.json();
+    //   todoList.innerHTML = '';
+    //   todos.forEach(todo => {
+    //     const li = document.createElement('li');
+    //     li.textContent = todo.text;
+    //     if(todo.completed) {
+    //       li.style.textDecoration = 'line-through';
+    //     }
+    //     todoList.appendChild(li);
+
+    //     const updateBtn = document.createElement('button');
+    //     updateBtn.textContent = '수정';
+    //     updateBtn.addEventListener('click', () => updateTodo());
+
+    //     const deleteBtn = document.createElement('button');
+    //     deleteBtn.textContent = '삭제';
+    //     deleteBtn.addEventListener('click', () => deleteTodo())
+    //   })
+    // }
+
+    renderTodos()
+  </script>
+</body>
+</html>

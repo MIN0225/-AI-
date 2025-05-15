@@ -1,6 +1,9 @@
 # 미션: 랭체인 라이브러리 왕창~
 import os
 from dotenv import load_dotenv
+import json
+import yaml
+
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_chroma import Chroma
@@ -13,12 +16,29 @@ load_dotenv()
 PERSIST_DIR = "./chroma_db"
 COLLECTION_NAME = "my-data"
 store = None
+DATA_DIR = './DATA'
+PROMPT_FILE = "./prompts.json"
 
 # 프롬프트 코드
+def load_prompts_from_json(file_path):
+  with open(file_path, "r", encoding="utf-8") as f:
+    prompt_data = json.load(f)
+    print(prompt_data)
+    return {ChatPromptTemplate.from_template(prompt_data["messages"][0]["content"])}
+
+def load_prompts_from_yaml(file_path):
+  with open(file_path, "r", encoding="utf-8") as f:
+    prompt_data = yaml.safe_load(f)
+    print(prompt_data)
+    return {ChatPromptTemplate.from_template(prompt_data["messages"][0]["content"])}
+
+prompt = load_prompts_from_json(PROMPT_FILE)
+
 template = """
-당신은 문서 기반으로 사용자의 질문에 답변하는 챗봇입니다.
+당신은 오직 주어진 문서 기반으로 사용자의 질문에 답변하는 챗봇입니다.
 다음 문서를 참고해서 사용자의 질문에 답하시오.
 각각의 문서는 번호와 유사도를 포함하고 있어, 답변을 말할 때 어떤 문서를 참조했는지도 알려주시오.
+문서가 없으면 아는 정보 말하지 말고 해당 정보가 없다고 답하시오.
 
 문서:
 {context}
@@ -48,11 +68,39 @@ def initialize_vector_db():
     print("이전 데이터의 로딩이 완료되었습니다.")
     return store
 
+
+def list_files():
+  files = [f for f in os.listdir(DATA_DIR) if os.path.isfile(os.path.join(DATA_DIR, f))]
+  print(files)
+  return files
+
+def delete_file(file_path):
+  # 1. DB에서 삭제한다
+  # 컬렉션 맵에서 해당 파일을 파싱하면서 생긴 데이터를 지워야 하는데...
+  # metadata에 파일명이 잘 저장되어 있어야함.. (metadata.source)
+  result = store._collection.get(where={"source": file_path})
+  ids = result.get("ids", [])
+  metadatas = result.get("metadatas", [])
+  print(f"존재하는 문서 수: {len(ids)} 메타데이터: {metadatas}")
+
+  store._collection.delete(where={"source": file_path})
+
+  # 2. 파일 자체를 삭제한다
+  path = os.path.join(DATA_DIR, file_path)
+  if os.path.exists(path):
+    os.remove(path)
+
+
+
 def create_vector_db(file_path):
   global store
 
   loader = PyPDFLoader(file_path)
   pages = loader.load()
+
+  # 우리의 메타데이터를 추가...  이거 안 해도 파일 불러올 때 메타데이터가 들어감
+  for page in pages:
+    page.metadata["source"] = os.path.basename(file_path)
 
   print(f"총 페이지 수: ", len(pages))
   # documents = loader.load()
@@ -75,6 +123,9 @@ def create_vector_db(file_path):
       collection_name=COLLECTION_NAME,
       embedding_function=embeddings,
       persist_directory=PERSIST_DIR)
+    
+    # 내용 추가
+    store.add_documents(texts)
     return store
   else:
     store = Chroma(
